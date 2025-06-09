@@ -9,7 +9,7 @@ class ChallengeResponse:
     def __init__(self, response):
         segments = response.split(':')
         if len(segments) != 6:
-            print('Unexpected format: Input response string should be in form DC1$::MOG:AC51EC464A91A35A04A80000000000000000000000000000:AC51EC464A91A35A04A862DA3106EC2B352661ECEF909C5E:1122334455667788')
+            print('Unexpected format: Input response string should be in form DC02$::corp:B32BDFA30A59A78100000000000000000000000000000000:77E69027CB4083C3823D4E3C0856589BA7720D304B324906:1122334455667788')
             return
         if len(segments[4]) != 48:
             print('Unexpected format: Input response string is longer than expected, are you sure it is NTLMv1?')
@@ -45,10 +45,7 @@ def print_output(data):
     print('./deskey_to_ntlm.pl <des_key_2>')
 
     print(f'\n4. Recover the final four characters of the NT hash using hashcat utils tool:')
-    if data.lm_challenge_response[-28:] == "0000000000000000000000000000":
-        print(f'./ct3_to_ntlm.bin {data.nt_challenge_response[32:48]} {data.full_challenge} {data.lm_challenge_response}') # needs looking at - why different for ess vs non ess?
-    else:
-        print(f'./ct3_to_ntlm.bin {data.nt_challenge_response[32:48]} {data.full_challenge}')
+    print(f'./ct3_to_ntlm.bin {data.nt_challenge_response[32:48]} {data.full_challenge}')
 
     print('\n5. Concatenate the three parts of the NT hash together.')
 
