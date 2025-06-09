@@ -52,8 +52,6 @@ def print_output(data):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--ntlmv1', help='NTLMv1 Hash in responder format', required=True)
-    parser.add_argument('--json', help='if this is set it will output to json', required=False, action='store_true')
-    parser.add_argument('--ct3', help='if this is set it will calculate ct3', required=False, action='store_true')
     args = parser.parse_args()
 
     data = ChallengeResponse(args.ntlmv1)
